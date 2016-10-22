@@ -1,6 +1,6 @@
 {
   "name": "webix-state-renderer",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "build": "rm build -rf && mkdir build/examples -p && npm run build:src && npm run copy-examples-vendors && npm run browserify-vendor",
     "build:watch": "watch 'npm run build:src' src/",
     "deploy": "npm run build && gh-pages -d build/examples",
-    "release": "npm version minor && npm publish"
+    "release": "git add --all && git commit -m \"Releasing\" && git push && npm version patch && git push && npm publish --tag"
   },
   "repository": {
     "type": "git",
