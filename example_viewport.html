@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Webix playing app</title>
+    <script src="../node_modules/webix/webix_debug.js"></script>
+    <script src="viewport.js"></script>
+    <link rel="stylesheet" href="../node_modules/webix/webix.css">
+
+    <style type="text/css">
+        .menu_button button {
+            text-align: left;
+            padding: 5px;
+        }
+    </style>
+    <script type="application/javascript">
+        webix.ready(function () {
+
+            webix.ui({
+                height: '100%',
+                cols: [
+                    {
+                        rows: [
+                            {
+                                view: 'button', label: 'a', click: function () {
+                                webix.$$('subview').addView({
+                                    template: 'test a'
+                                });
+                            }
+                            },
+                            {view: 'button', label: 'b'}
+                        ]
+                    },
+                    {id: 'subview', view: 'viewport'}
+                ]
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
