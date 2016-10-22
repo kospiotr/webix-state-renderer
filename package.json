@@ -11,7 +11,8 @@
     "build:src": "npm run copy-examples && npm run browserify-src",
     "build": "rm build -rf && mkdir build/examples -p && npm run build:src && npm run copy-examples-vendors && npm run browserify-vendor",
     "build:watch": "watch 'npm run build:src' src/",
-    "deploy": "npm run build && gh-pages -d build/examples"
+    "deploy": "npm run build && gh-pages -d build/examples",
+    "release": "npm version minor && npm publish"
   },
   "repository": {
     "type": "git",
