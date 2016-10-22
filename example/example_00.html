@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Webix playing app</title>
+    <script src="../node_modules/webix/webix_debug.js"></script>
+    <link rel="stylesheet" href="../node_modules/webix/webix.css">
+
+    <style type="text/css">
+        .menu_button button {
+            text-align: left;
+            padding: 5px;
+        }
+    </style>
+    <script type="application/javascript">
+        webix.ready(function () {
+
+            var app;
+            var page1Template = {template: 'Page1'};
+            var page2Template = {template: 'Page2'};
+            var mainTemplate = {
+                rows: [
+                    {
+                        type: "header", template: "My App!"
+                    },
+                    {
+                        height: '100%',
+                        cols: [
+                            {
+                                type: 'toolbar', css: 'menu_button',
+                                rows: [
+                                    {
+                                        view: "button", label: "Page 1", width: 100, click: function () {
+                                        render(page1Template);
+                                    }
+                                    },
+                                    {
+                                        view: "button", label: "Page 2", width: 100, click: function () {
+                                        render(page2Template);
+                                    }
+                                    }
+
+                                ]
+                            },
+                            {id: 'subview', type: 'multiview', cells: [{template: 'Empty subview'}]}
+                        ]
+                    }
+                ]
+            };
+
+
+            app = webix.ui(mainTemplate);
+
+            var subview = webix.$$('subview');
+
+            function render(template) {
+
+                subview = webix.ui(template, subview);
+                //webix.ui(template, subview);
+            }
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

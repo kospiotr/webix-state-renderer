@@ -1,0 +1,118 @@
+<html>
+<head>
+    <title>Webix playing app</title>
+    <script src="../node_modules/webix/webix_debug.js"></script>
+    <script src="./abstract-state-router.js"></script>
+    <link rel="stylesheet" href="../node_modules/webix/webix.css">
+    <script src="../src/webix-state-renderer.js"></script>
+
+    <script type="application/javascript">
+        webix.ready(function () {
+
+            var webixStateRenderer = WebixStateRouter(webix);
+            var stateRouter = abstractStateRouter(webixStateRenderer, document.body);
+
+            var menuTpl = [
+                        {
+                            view: "button", label: "Page 1", width: 100, click: function () {
+                            stateRouter.go('app.page1')
+                        }
+                        },
+                        {
+                            view: "button", label: "Page 2", width: 100, click: function () {
+                            stateRouter.go('app.page2')
+                        }
+                        },
+                        {
+                            view: "button", label: "Page 2 sub 1", width: 100, click: function () {
+                            stateRouter.go('app.page2.sub1')
+                        }
+                        },
+                        {
+                            view: "button", label: "Page 2 sub 2", width: 100, click: function () {
+                            stateRouter.go('app.page2.sub2')
+                        }
+                        },
+                        {
+                            view: "button", label: "Page 2 sub 3", width: 100, click: function () {
+                            stateRouter.go('app.page2.sub3')
+                        }
+                        }
+                    ]
+                    ;
+
+            stateRouter.addState({
+                name: 'app',
+                template: {
+                    rows: [
+                        {
+                            type: "header", template: "My App!"
+                        },
+                        {
+                            height: '100%',
+                            cols: [
+                                {
+                                    type: 'toolbar', css: 'menu_button',
+                                    rows: menuTpl
+                                },
+                                {$subview: true}
+                            ]
+                        }
+                    ]
+                },
+                route: '/app'
+            });
+
+            stateRouter.addState({
+                name: 'app.page1',
+                template: {
+                    $oninit: function () {
+                        console.log('init');
+                    },
+                    template: 'Page1a'
+                },
+                route: '/page1',
+                activate: function (context) {
+
+                }
+            });
+
+            stateRouter.addState({
+                name: 'app.page2',
+                template: {rows: [{template: 'Page2'}, {$subview: true}]},
+                route: '/page2'
+            });
+
+            stateRouter.addState({
+                name: 'app.page2.sub1',
+                template: {template: 'Page2 sub1'},
+                route: '/sub1'
+            });
+
+            stateRouter.addState({
+                name: 'app.page2.sub2',
+                template: {template: 'Page2 sub2'},
+                route: '/sub2'
+            });
+
+            stateRouter.addState({
+                name: 'app.page2.sub3',
+                template: {template: 'Page2 sub3'}
+            });
+
+            stateRouter.evaluateCurrentRoute('app');
+        });
+
+    </script>
+
+    <style type="text/css">
+        .menu_button button {
+            text-align: left;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+</html>
