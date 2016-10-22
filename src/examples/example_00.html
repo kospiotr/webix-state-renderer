@@ -1,8 +1,8 @@
 <html>
 <head>
-    <title>Webix playing app</title>
-    <script src="../node_modules/webix/webix_debug.js"></script>
-    <link rel="stylesheet" href="../node_modules/webix/webix.css">
+    <title>Sample webix app</title>
+    <link rel="stylesheet" href="./webix/webix.css" type="text/css">
+    <script src="./webix/webix.js" type="text/javascript"></script>
 
     <style type="text/css">
         .menu_button button {
@@ -40,7 +40,7 @@
 
                                 ]
                             },
-                            {id: 'subview', type: 'multiview', cells: [{template: 'Empty subview'}]}
+                            {id: 'subview'}
                         ]
                     }
                 ]
@@ -52,9 +52,7 @@
             var subview = webix.$$('subview');
 
             function render(template) {
-
                 subview = webix.ui(template, subview);
-                //webix.ui(template, subview);
             }
         });
 

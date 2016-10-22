@@ -289,7 +289,7 @@ var webixJet = {
   },
   start: function (name) {
     //init routing
-    //routie("!*", app.router);
+    routie("!*", app.router);
 
     if (!window.location.hash)
       webixJet.show(webixJet.config.start);

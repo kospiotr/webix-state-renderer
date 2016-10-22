@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>Sample webix app</title>
+    <link rel="stylesheet" href="./webix/webix.css" type="text/css">
+    <script src="./webix/webix.js" type="text/javascript"></script>
+    <script src="./abstract-state-router.js" type="text/javascript"></script>
+    <script src="./webix-state-renderer.js" type="text/javascript"></script>
+
+    <style type="text/css">
+        .menu_button button {
+            text-align: left;
+            padding: 5px;
+        }
+    </style>
+
+    <script type="application/javascript">
+        webix.ready(function () {
+
+            var stateRenderer = webixStateRenderer(webix);
+            var stateRouter = abstractStateRouter(stateRenderer, document.body);
+
+
+            stateRouter.addState({
+                name: 'app',
+                template: {
+                    $ui: {
+                        rows: [
+                            {
+                                type: "header", template: "My App!"
+                            },
+                            {
+                                height: '100%',
+                                cols: [
+                                    {
+                                        type: 'toolbar', css: 'menu_button',
+                                        rows: [
+                                            {
+                                                view: "button", label: "Page 1", width: 100, click: function () {
+                                                stateRouter.go('app.page1')
+                                            }
+                                            },
+                                            {
+                                                view: "button", label: "Page 2", width: 100, click: function () {
+                                                stateRouter.go('app.page2')
+                                            }
+                                            }
+                                        ]
+                                    },
+                                    {$subview: true}
+                                ]
+                            }
+                        ]
+                    }
+                },
+                route: '/app'
+            });
+
+            stateRouter.addState({
+                name: 'app.page1',
+                template: {
+                    $ui: {
+                        template: 'Page1 content'
+                    }
+                },
+                route: '/page1'
+            })
+            ;
+
+            stateRouter.addState({
+                name: 'app.page2',
+                template: {
+                    $ui: {
+                        template: 'Page2 content'
+                    }
+                },
+                route: '/page2'
+            });
+
+            stateRouter.evaluateCurrentRoute('app.page1');
+        });
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

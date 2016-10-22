@@ -4,9 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "karma start --singleRun",
-    "test:debug": "npm run test -- --log-level debug",
-    "test:watch": "karma start --auto-watch"
+    "browserify-vendor": "browserify ./node_modules/abstract-state-router/index.js --standalone abstract-state-router > ./build/examples/abstract-state-router.js",
+    "browserify-src": "browserify ./src/index.js --standalone webix-state-renderer > ./build/examples/webix-state-renderer.js",
+    "copy-examples-vendors": "cp ./node_modules/webix ./build/examples/webix -apr",
+    "copy-examples": "cp ./src/examples/ ./build -a",
+    "build:src": "npm run copy-examples && npm run browserify-src",
+    "build": "rm build -rf && mkdir build/examples -p && npm run build:src && npm run copy-examples-vendors && npm run browserify-vendor",
+    "build:watch": "watch 'npm run build:src' src/",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -20,12 +25,14 @@
   "homepage": "https://github.com/kospiotr/webix-state-renderer#readme",
   "devDependencies": {
     "abstract-state-router": "^5.13.0",
+    "browserify": "^13.1.0",
     "jasmine-core": "^2.5.2",
     "karma": "^1.3.0",
     "karma-chrome-launcher": "^2.0.0",
     "karma-commonjs": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.2",
+    "watch": "^1.0.1",
     "webix": "^4.0.8"
   }
 }
