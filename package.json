@@ -2,7 +2,7 @@
   "name": "webix-state-renderer",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "browserify-vendor": "browserify ./node_modules/abstract-state-router/index.js --standalone abstract-state-router > ./build/examples/abstract-state-router.js",
     "browserify-src": "browserify ./src/index.js --standalone webix-state-renderer > ./build/examples/webix-state-renderer.js",
@@ -11,7 +11,7 @@
     "build:src": "npm run copy-examples && npm run browserify-src",
     "build": "rm build -rf && mkdir build/examples -p && npm run build:src && npm run copy-examples-vendors && npm run browserify-vendor",
     "build:watch": "watch 'npm run build:src' src/",
-    "deploy": "gh-pages -d build/examples"
+    "deploy": "npm run build && gh-pages -d build/examples"
   },
   "repository": {
     "type": "git",
