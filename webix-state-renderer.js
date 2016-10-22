@@ -72,10 +72,10 @@ module.exports = function webixStateRenderer(webix, webixOptions, options) {
         var templateCopy = copy(context.template, null, lifecycle);
         var parentCmp = context.element;
 
+        templateCopy.$scope = {};
         var subviewCmp = renderSubview(parentCmp, templateCopy, subviewId);
 
         subviewCmp.$lifecycle = lifecycle;
-        subviewCmp.$scope = {};
         cb(null, subviewCmp);
       },
       reset: function reset(cmp, cb) {
